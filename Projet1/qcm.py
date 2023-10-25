@@ -7,11 +7,18 @@ class QCM:
         self.questions = package_questions
 
     """
-    Permet de shuffle les questions du QCM.
+    Permet de shuffle les questions et les choix du QCM.
     """
     def shuffle_qcm(self):
         random.shuffle(self.questions)
+        for i in range(len(self.questions)):
+            self.questions[i].shuffle_choix()
 
+    """
+    Permet de demander a l'utilisateur la reponse. 
+    Si la reponse n'est pas A, a, B, b, C, c on demande a l'utilisateur une nouvelle reponse.
+    Une fois la reponse valide on la RETURN
+    """
     def demande_reponse(self):
         reponse = input("Reponse A, B ou C \n").upper()
 
@@ -22,7 +29,6 @@ class QCM:
 
         return reponse
 
-
     """
     Lancement du qcm
     """
@@ -30,14 +36,34 @@ class QCM:
         note = 0
         correction = []
         for i in range(len(self.questions)):
-            self.questions[i].print_question()
-            self.questions[i].print_choix()
+            print(self.questions[i].get_question())
+            
+            choix = self.questions[i].get_choix()
+            print("A : " + choix[0])
+            print("B : " + choix[1])
+            print("C : " + choix[2])
+
             reponse = self.demande_reponse()
-            if self.questions[i].correction(reponse) is True:
-                print("bien joué !")
-                note = note + 1
-            elif self.questions[i].correction(reponse) is False:
-                print("Faux !")
+            match reponse:
+                case "A":
+                    if self.questions[i].correction(choix[0]) is True:
+                        note = note + 1
+                        print("Bien joué !\n")
+                    else:
+                        print("Faux !\n")
+                case "B":
+                    if self.questions[i].correction(choix[1]) is True:
+                        note = note + 1
+                        print("Bien joué !\n")
+                    else:
+                        print("Faux !\n")
+                case "C":
+                    if self.questions[i].correction(choix[2]) is True:
+                        note = note + 1.
+                        print("Bien joué !\n")
+                    else:
+                        print("Faux !\n")
+
             correction.append(self.questions[i].get_reponse())
 
         print("Fin du qcm !")
