@@ -2,10 +2,13 @@ import string
 import random
 import math
 from file import *
+from file import FILE
+
 
 class MDP:
     def __init__(self, pwd=""):
         self.mot_de_passe = pwd
+        self.passphrase = ""
 
     def calcul_N(self):
         # binaire
@@ -110,6 +113,12 @@ class MDP:
     def set_mdp(self, mdp):
         self.mot_de_passe = mdp
 
+    def get_passphrase(self, passphrase):
+        return self.passphrase
+
+    def set_passphrase(self, passphrase):
+        self.passphrase = passphrase
+
     def print_mdp(self):
         print(self.mot_de_passe)
 
@@ -141,19 +150,25 @@ class MDP:
             code = code + str((random.choice(dice)))
         return code
 
-    def new_passphrase(self):
-        file = open_file("eff_large_wordlist.txt")
+    def generate_passphrase(self):
+        file = FILE("eff_large_wordlist.txt")
+        file.set_file()
         code = []
         passphrase = ""
+
         for i in range(6):
             code.append(self.lancer_de())
 
         code.sort()
-        line_file = search_5code_infile(file, code)
-        close_file(file)
+        line_file = file.search_5code_infile(code)
+        file.close_file()
 
         for i in range(len(line_file)):
             passphrase = passphrase + line_file[i]
 
-        print(passphrase)
+        return passphrase
 
+    def new_passphrase(self):
+        passphrase = self.generate_passphrase()
+        print(passphrase)
+        self.set_passphrase(passphrase)
