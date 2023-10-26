@@ -1,7 +1,6 @@
 import string
 import random
 import math
-from file import *
 from file import FILE
 
 
@@ -10,6 +9,21 @@ class MDP:
         self.mot_de_passe = pwd
         self.passphrase = ""
 
+    def get_mdp(self):
+        return self.mot_de_passe
+
+    def set_mdp(self, mdp):
+        self.mot_de_passe = mdp
+
+    def get_passphrase(self, passphrase):
+        return self.passphrase
+
+    def set_passphrase(self, passphrase):
+        self.passphrase = passphrase
+
+    """
+    Permet de caculer N selon le type de char utiliser dans le mot de passe
+    """
     def calcul_N(self):
         # binaire
         binaire = True
@@ -86,12 +100,21 @@ class MDP:
         # Sinon plus puissant
         return 90
 
+    """
+    Permet de caculer L la longueur de charactere du mot de passe
+    """
     def calcul_L(self):
         return len(self.mot_de_passe)
 
+    """
+    Permet de lancer le test de force du mot de passe
+    """
     def test_force_mdp(self):
         print(self.calcul_entropie())
 
+    """
+    Permet de calculer l'entropie d'un mot de passe afin de connaitre sa force
+    """
     def calcul_entropie(self):
         L = self.calcul_L()
         N = self.calcul_N()
@@ -99,30 +122,32 @@ class MDP:
         entropie = L * math.log2(N)
 
         if entropie <= 64:
-            return "très faible"
+            return "entropie : " + str(round(entropie, 2)) + " force : très faible"
         elif 64 < entropie <= 80:
-            return "faible"
+            return "entropie : " + str(round(entropie, 2)) + " force : faible"
         elif 80 < entropie <= 100:
-            return "moyen"
+            return "entropie : " + str(round(entropie, 2)) + " force : moyen"
         else:
-            return "fort"
+            return "entropie : " + str(round(entropie, 2)) + " force : fort"
 
-    def get_mdp(self):
-        return self.mot_de_passe
-
-    def set_mdp(self, mdp):
-        self.mot_de_passe = mdp
-
-    def get_passphrase(self, passphrase):
-        return self.passphrase
-
-    def set_passphrase(self, passphrase):
-        self.passphrase = passphrase
-
+    """
+    Permet d'afficher le mot de passe
+    """
     def print_mdp(self):
         print(self.mot_de_passe)
 
+    """
+    Permet d'afficher le mot de passe
+    """
+    def print_passphrase(self):
+        print(self.passphrase)
+
+    """
+    Generer un mot de passe avec un nombre précis de minuscule, majuscule, chiffre et symbole
+    """
     def generate_mdp(self, nombre_minuscule, nombre_majuscule, nombre_chiffre, nombre_symbole):
+        if nombre_minuscule+nombre_majuscule+nombre_chiffre+nombre_symbole == 0:
+            raise Exception("ERROR création mot de passe impossible")
         str_minuscule = ''.join(random.choices(string.ascii_lowercase, k=nombre_minuscule))
         str_majuscule = ''.join(random.choices(string.ascii_uppercase, k=nombre_majuscule))
         str_chiffre = ''.join(random.choices(string.digits, k=nombre_chiffre))
@@ -131,6 +156,9 @@ class MDP:
         mdp = ''.join(random.sample(mdp, len(mdp)))
         return mdp
 
+    """
+    Permet de generer un mot de passe en demandant a l'utiltisateur des informations puis test la force du mot de passe
+    """
     def new_mdp(self):
         print("Nous allons crée un mot de passe.")
         print("Pour cela vous devez parametre quelques informations :")
@@ -143,6 +171,9 @@ class MDP:
         print(self.get_mdp())
         self.test_force_mdp()
 
+    """
+    Permet de lancer 5 dé (1 à 6) et de retourner les resultats concatenés
+    """
     def lancer_de(self):
         dice = [1, 2, 3, 4, 5, 6]
         code = ""
@@ -150,6 +181,10 @@ class MDP:
             code = code + str((random.choice(dice)))
         return code
 
+    """
+    Permet de generer une passephrase via 6 code à 5 chiffre generer automatiquement.
+    Chaque code générer aleatoirement correspond a un mot dans un fichier dictionnaire.
+    """
     def generate_passphrase(self):
         file = FILE("eff_large_wordlist.txt")
         file.set_file()
@@ -164,11 +199,14 @@ class MDP:
         file.close_file()
 
         for i in range(len(line_file)):
-            passphrase = passphrase + line_file[i]
+            passphrase = passphrase +"-"+ line_file[i]
 
-        return passphrase
+        return passphrase[1:]
 
+    """
+    Permet de lancer la generation de la passphrase et de l'afficher.
+    """
     def new_passphrase(self):
         passphrase = self.generate_passphrase()
-        print(passphrase)
         self.set_passphrase(passphrase)
+        self.print_passphrase()

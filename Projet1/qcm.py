@@ -35,6 +35,7 @@ class QCM:
     def lancement_qcm(self):
         note = 0
         correction = []
+        question = []
         for i in range(len(self.questions)):
             print(self.questions[i].get_question())
 
@@ -64,10 +65,12 @@ class QCM:
                     else:
                         print("Faux !\n")
 
+            question.append(self.questions[i].get_question())
             correction.append(self.questions[i].get_reponse())
 
         print("Fin du qcm !")
         print("Vous avez " + str(note) + "/" + str(len(self.questions)))
-        print("Voici la correction : ")
+        print("Voici la correction : \n")
         for i in range(len(self.questions)):
-            print(correction[i])
+            print(question[i])
+            print(correction[i]+"\n\n")

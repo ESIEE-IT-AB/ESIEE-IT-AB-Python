@@ -56,43 +56,53 @@ class TestMDP(unittest.TestCase):
     def test_generate_mdp(self):
         mdp_instance = MDP()
 
-        nombre_minuscule = 5
-        nombre_majuscule = 3
-        nombre_chiffre = 4
-        nombre_symbole = 2
+        nombre_minuscule_default = 5
+        nombre_majuscule_default = 3
+        nombre_chiffre_default = 4
+        nombre_symbole_default = 2
 
-        mdp = mdp_instance.generate_mdp(nombre_minuscule, nombre_majuscule, nombre_chiffre, nombre_symbole)
+        mdp = mdp_instance.generate_mdp(nombre_minuscule_default, nombre_majuscule_default, nombre_chiffre_default, nombre_symbole_default)
 
-        count_minuscule = 0
+        nombre_minuscule = 0
         for char in mdp:
             if char in string.ascii_lowercase:
-                count_minuscule += 1
-                
-        count_majuscule = 0
+                nombre_minuscule += 1
+
+        nombre_majuscule = 0
         for char in mdp:
             if char in string.ascii_uppercase:
-                count_majuscule += 1
+                nombre_majuscule += 1
 
-        count_chiffre = 0
+        nombre_chiffre = 0
         for char in mdp:
             if char in string.digits:
-                count_chiffre += 1
+                nombre_chiffre += 1
 
-        count_symbole = 0
+        nombre_symbole = 0
         for char in mdp:
             if char in string.punctuation:
-                count_symbole += 1
+                nombre_symbole += 1
 
-        self.assertEqual(count_minuscule, nombre_minuscule)
-        self.assertEqual(count_majuscule, nombre_majuscule)
-        self.assertEqual(count_chiffre, nombre_chiffre)
-        self.assertEqual(count_symbole, nombre_symbole)
+        self.assertEqual(nombre_minuscule, nombre_minuscule_default)
+        self.assertEqual(nombre_majuscule, nombre_majuscule_default)
+        self.assertEqual(nombre_chiffre, nombre_chiffre_default)
+        self.assertEqual(nombre_symbole, nombre_symbole_default)
 
-    # Ce test est pour la méthode interactive new_mdp.
-    # Vous pourriez avoir besoin de mocker les appels d'entrée pour le rendre non interactif.
+    def input_stub(*args):
+        responses = ["2", "2", "2", "2"]
+        return responses.pop(0)
+
     def test_new_mdp(self):
-        # Ici, vous pourriez utiliser le module `unittest.mock` pour mocker la fonction `input`.
-        pass
+        mdp_instance = MDP()
+
+        original_input = __builtins__.input
+        __builtins__.input = self.input_stub
+
+        mdp_instance.new_mdp()
+
+        __builtins__.input = original_input
+
+        self.assertEqual(len(mdp_instance.get_mdp()), 8)
 
     def test_lancer_de(self):
         mdp = MDP()
@@ -106,6 +116,7 @@ class TestMDP(unittest.TestCase):
         mdp = MDP()
         passphrase = mdp.generate_passphrase()
         self.assertIsInstance(passphrase, str)
+
 
 if __name__ == '__main__':
     unittest.main()
