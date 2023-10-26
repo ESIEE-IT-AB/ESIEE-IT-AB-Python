@@ -1,17 +1,18 @@
 from question import Question
+from reponse import Reponse
 from qcm import QCM
 
 questions = [
-    Question("Python est un langage _______", "interprété", "compilé", "machine", "interprété"),
-    Question("Quel est la bonne syntaxe pour ecrire sur la sortie standard en Python", "echo \'bonjour\'", "print(\"bonjour\")", "printf(\"bonjour\")", "print(\"bonjour\")"),
-    Question("En python 3, que fait l’opérateur //", "Division entière", "Retourne le reste", "Division du float par zéro", "Division entière"),
-    Question("En python, quel mot clé est utilisé pour commencer une fonction", "function", "def", "import", "def"),
-    Question("Quelle sera la sortie du code suivant: print type(type(int))", "type int", "type type", "Error", "type type"),
-    Question("Quelle est la sortie pour 'python' [-3]", "h", "t", "o", "h"),
-    Question("Quel est la bonne syntaxe pour ecrire sur la sortie standard en Python", "Module", "Classe", "Méthode", "Méthode"),
-    Question("Supposons que list1 est [2, 3, 4, 5, 1, 20, 6], quelle sera la valeur de list1 après list1.pop(1)", "[2, 1, 4, 5, 1, 20, 6]", "[2, 4, 5, 1, 20, 6]", "[2, 3, 4, 5, 1, 20, 6, 1]", "[2, 4, 5, 1, 20, 6]"),
-    Question("Quel opérateur est surchargé par la fonction or()?", "//", "||", "|", "|"),
-    Question("Comment je m'appelle ?", "Antoine", "Julien", "Jeremy", "Antoine")
+    Question("Python est un langage _______", [Reponse("interprété", True), Reponse("compilé"), Reponse("machine")]),
+    Question("Quel est la bonne syntaxe pour ecrire sur la sortie standard en Python", [Reponse("echo \'bonjour\'", True), Reponse("print(\"bonjour\")"), Reponse("printf(\"bonjour\")")]),
+    Question("En python 3, que fait l’opérateur //", [Reponse("Division entière", True), Reponse("Retourne le reste"), Reponse("Division du float par zéro")]),
+    Question("En python, quel mot clé est utilisé pour commencer une fonction", [Reponse("function"), Reponse("def", True), Reponse("import")]),
+    Question("Quelle sera la sortie du code suivant: print type(type(int))", [Reponse("type int"), Reponse("type type", True), Reponse("Error")]),
+    Question("Quelle est la sortie pour 'python' [-3]", [Reponse("h", True), Reponse("t"), Reponse("o")]),
+    Question("Quel est la bonne syntaxe pour ecrire sur la sortie standard en Python", [Reponse("Module"), Reponse("Classe"), Reponse("Méthode", True)]),
+    Question("Supposons que list1 est [2, 3, 4, 5, 1, 20, 6], quelle sera la valeur de list1 après list1.pop(1)", [Reponse("[2, 1, 4, 5, 1, 20, 6]"), Reponse("[2, 4, 5, 1, 20, 6]", True), Reponse("[2, 3, 4, 5, 1, 20, 6, 1]")]),
+    Question("Quel opérateur est surchargé par la fonction or()?", [Reponse("//"), Reponse("||"), Reponse("|", True)]),
+    Question("Comment je m'appelle ?", [Reponse("Antoine"), Reponse("Julien"), Reponse("Jeremy", True)])
 ]
 
 mon_qcm = QCM(questions)

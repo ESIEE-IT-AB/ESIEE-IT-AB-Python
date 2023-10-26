@@ -1,33 +1,36 @@
 import random
+from reponse import Reponse
 
 
 class Question:
-    def __init__(self, question, choix1, choix2, choix3, reponse):
+    def __init__(self, question, reponses):
         self.question = question
-        self.choix = [choix1, choix2, choix3]
-        self.reponse = reponse
+        self.reponses = reponses
 
     """
     Permet de connaitre si la reponse de l'utilisateur est correcte ou non.
     return True si OK ou False si KO.
     """
     def correction(self, choix_utilisateur):
-        if choix_utilisateur == self.reponse:
-            return True
-        else:
-            return False
+        for reponse in self.reponses:
+            if reponse.get_content() == choix_utilisateur and reponse.is_answer_correct():
+                return True
+        return False
 
     """
     Permet de recuperer la reponse d'une question
     """
-    def get_reponse(self):
-        return self.reponse
+    def get_reponse_correct(self):
+        for reponse in self.reponses:
+            if reponse.is_answer_correct():
+                return reponse.get_content()
+        return None
 
     """
     Permet de recuperer les choix d'une question
     """
-    def get_choix(self):
-        return self.choix
+    def get_reponse(self):
+        return [reponse.get_content() for reponse in self.reponses]
 
     """
     Permet de recuperer la question
@@ -38,5 +41,5 @@ class Question:
     """
     Permet de shuffle les choix
     """
-    def shuffle_choix(self):
-        random.shuffle(self.choix)
+    def shuffle_reponse(self):
+        random.shuffle(self.reponses)

@@ -12,7 +12,7 @@ class QCM:
     def shuffle_qcm(self):
         random.shuffle(self.questions)
         for i in range(len(self.questions)):
-            self.questions[i].shuffle_choix()
+            self.questions[i].shuffle_reponse()
 
     """
     Permet de demander a l'utilisateur la reponse. 
@@ -34,43 +34,44 @@ class QCM:
     """
     def lancement_qcm(self):
         note = 0
-        correction = []
-        question = []
-        for i in range(len(self.questions)):
-            print(self.questions[i].get_question())
+        correction_save = []
+        question_save = []
 
-            choix = self.questions[i].get_choix()
-            print("A : " + choix[0])
-            print("B : " + choix[1])
-            print("C : " + choix[2])
+        for question in self.questions:
+            print(question.get_question())
 
-            reponse = self.demande_reponse()
-            match reponse:
+            reponse = question.get_reponse()
+            print("A : " + reponse[0])
+            print("B : " + reponse[1])
+            print("C : " + reponse[2])
+
+            reponse_user = self.demande_reponse()
+            match reponse_user:
                 case "A":
-                    if self.questions[i].correction(choix[0]) is True:
-                        note = note + 1
+                    if question.correction(reponse[0]):
+                        note += 1
                         print("Bien joué !\n")
                     else:
                         print("Faux !\n")
                 case "B":
-                    if self.questions[i].correction(choix[1]) is True:
-                        note = note + 1
+                    if question.correction(reponse[1]):
+                        note += 1
                         print("Bien joué !\n")
                     else:
                         print("Faux !\n")
                 case "C":
-                    if self.questions[i].correction(choix[2]) is True:
-                        note = note + 1.
+                    if question.correction(reponse[2]):
+                        note += 1
                         print("Bien joué !\n")
                     else:
                         print("Faux !\n")
 
-            question.append(self.questions[i].get_question())
-            correction.append(self.questions[i].get_reponse())
+            question_save.append(question.get_question())
+            correction_save.append(question.get_reponse_correct())
 
         print("Fin du qcm !")
         print("Vous avez " + str(note) + "/" + str(len(self.questions)))
         print("Voici la correction : \n")
         for i in range(len(self.questions)):
-            print(question[i])
-            print(correction[i]+"\n\n")
+            print(question_save[i])
+            print(correction_save[i]+"\n\n")
