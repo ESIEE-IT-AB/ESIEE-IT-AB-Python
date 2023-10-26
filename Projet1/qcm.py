@@ -37,7 +37,7 @@ class QCM:
         correction = []
         for i in range(len(self.questions)):
             print(self.questions[i].get_question())
-            
+
             choix = self.questions[i].get_choix()
             print("A : " + choix[0])
             print("B : " + choix[1])

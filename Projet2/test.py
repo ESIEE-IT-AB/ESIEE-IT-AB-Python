@@ -14,10 +14,10 @@ class TestMDP(unittest.TestCase):
         mdp = MDP("1A2B")
         self.assertEqual(mdp.calcul_N(), 16)
 
-        mdp = MDP("ABCDE")
+        mdp = MDP("ABCDEFGHIJ")
         self.assertEqual(mdp.calcul_N(), 26)
 
-        mdp = MDP("A1B2")
+        mdp = MDP("A1B2HI98")
         self.assertEqual(mdp.calcul_N(), 36)
 
         mdp = MDP("AbCd")
@@ -43,7 +43,7 @@ class TestMDP(unittest.TestCase):
         mdp = MDP("10101")
         self.assertEqual(mdp.calcul_entropie(), "très faible")
 
-        mdp = MDP("12345678901234567890123456789012")
+        mdp = MDP("123456789012345678901234")
         self.assertEqual(mdp.calcul_entropie(), "faible")
 
         mdp = MDP("AbCdEfGh12345!")
