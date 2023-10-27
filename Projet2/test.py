@@ -1,12 +1,20 @@
-import string
+import io
+import sys
 import unittest
-from force_mdp import FORCE_MDP
 from gen_mdp import GEN_MDP
 from gen_passphrase import GEN_PASSPHRASE
 from module_mdp import *
 
 
 class TestMDP(unittest.TestCase):
+
+    def setUp(self):
+        self.held_output = io.StringIO()
+        sys.stdout = self.held_output
+
+    def tearDown(self):
+        self.held_output.close()
+        sys.stdout = sys.__stdout__
 
     def test_calcul_N(self):
         mdp = "10101"
