@@ -23,3 +23,5 @@ questions = [
 mon_qcm = QCM(questions)
 mon_qcm.shuffle_qcm()
 mon_qcm.lancement_qcm()
+
+print("QCM terminé merci d'avoir essayer, aurevoir")

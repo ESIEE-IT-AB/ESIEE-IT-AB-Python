@@ -53,6 +53,7 @@ class GEN_MDP:
 
         mdp = self.generate_mdp(int(nombre_minuscule), int(nombre_majuscule), int(nombre_chiffre), int(nombre_symbole))
         self.set_mdp(mdp)
+        print("Mot de passe crée : ")
         print(self.get_mdp())
         print(calcul_entropie(self.get_mdp()))
 

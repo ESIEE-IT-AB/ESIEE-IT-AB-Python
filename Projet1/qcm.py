@@ -71,11 +71,10 @@ class QCM:
 
         print("Fin du qcm !")
         print("Vous avez " + str(note) + "/" + str(len(self.questions)))
-
-        time.sleep(3)
+        time.sleep(2)
 
         print("Voici la correction : \n")
         for i in range(len(self.questions)):
-            print(question_save[i])
-            print(correction_save[i]+"\n\n")
+            print("Question : " + question_save[i])
+            print("Reponse : " + correction_save[i]+"\n\n")
             time.sleep(2)
