@@ -1,16 +1,18 @@
-from mdp import MDP
+from force_mdp import FORCE_MDP
+from gen_mdp import GEN_MDP
+from gen_passphrase import GEN_PASSPHRASE
 
 # FORCE MDP
-mdp1 = MDP("Joba1563ADz511qzd")
+force_mdp = FORCE_MDP("Joba1563ADz511qzd")
 
 # NEW MDP
-mdp2 = MDP()
+gen_mdp = GEN_MDP()
 
 # NEW PASSPHRASE
-mdp3 = MDP()
+gen_passphrase = GEN_PASSPHRASE()
 
 def print_menu():
-    print('\n\n\n1 Tester la force d\'un mot de passe')
+    print('\n\n1 Tester la force d\'un mot de passe')
     print('2 Crée un mot de passe et tester sa force')
     print('3 Crée une passphrase')
     print('4 Exit')
@@ -26,14 +28,14 @@ while(True):
         case 1:
             print("Test de force de votre mot de passe\n")
             mdp = input('Saisissez votre mot de passe :\n')
-            mdp1.set_mdp(mdp)
-            mdp1.test_force_mdp()
+            force_mdp.set_mdp(mdp)
+            force_mdp.test_force_mdp()
         case 2:
             print("Création de votre mot de passe\n")
-            mdp2.new_mdp()
+            gen_mdp.new_mdp()
         case 3:
             print("Création de votre passphrase\n")
-            mdp3.new_passphrase()
+            gen_passphrase.new_passphrase()
         case 4:
             exit(0)
 

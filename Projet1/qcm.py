@@ -1,5 +1,5 @@
-from question import Question
 import random
+import time
 
 
 class QCM:
@@ -7,12 +7,12 @@ class QCM:
         self.questions = package_questions
 
     """
-    Permet de shuffle les questions et les choix du QCM.
+    Permet de shuffle les questions et les reponses du QCM.
     """
     def shuffle_qcm(self):
         random.shuffle(self.questions)
         for i in range(len(self.questions)):
-            self.questions[i].shuffle_reponse()
+            self.questions[i].shuffle_reponses()
 
     """
     Permet de demander a l'utilisateur la reponse. 
@@ -71,7 +71,11 @@ class QCM:
 
         print("Fin du qcm !")
         print("Vous avez " + str(note) + "/" + str(len(self.questions)))
+
+        time.sleep(3)
+
         print("Voici la correction : \n")
         for i in range(len(self.questions)):
             print(question_save[i])
             print(correction_save[i]+"\n\n")
+            time.sleep(2)

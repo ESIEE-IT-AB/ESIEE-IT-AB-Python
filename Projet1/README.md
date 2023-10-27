@@ -16,6 +16,7 @@ Le projet est composé de trois fichiers principaux :
 1. `main.py` : Le script principal qui initialise les questions et lance le QCM.
 2. `qcm.py` : Contient la classe `QCM` qui gère la logique du questionnaire.
 3. `question.py` : Contient la classe `Question` qui définit la structure d'une question et ses méthodes associées.
+4. `reponse.py` : Ce fichier contient la classe Reponse qui définit la structure d'une réponse et ses attributs associés.
 
 ## Utilisation
 

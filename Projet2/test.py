@@ -1,60 +1,63 @@
 import string
 import unittest
-from mdp import MDP
+from force_mdp import FORCE_MDP
+from gen_mdp import GEN_MDP
+from gen_passphrase import GEN_PASSPHRASE
+from module_mdp import *
 
 
 class TestMDP(unittest.TestCase):
 
     def test_calcul_N(self):
-        mdp = MDP("10101")
-        self.assertEqual(mdp.calcul_N(), 2)
+        mdp = "10101"
+        self.assertEqual(calcul_N(mdp), 2)
 
-        mdp = MDP("12345")
-        self.assertEqual(mdp.calcul_N(), 10)
+        mdp = "12345"
+        self.assertEqual(calcul_N(mdp), 10)
 
-        mdp = MDP("1A2B")
-        self.assertEqual(mdp.calcul_N(), 16)
+        mdp = "1A2B"
+        self.assertEqual(calcul_N(mdp), 16)
 
-        mdp = MDP("ABCDEFGHIJ")
-        self.assertEqual(mdp.calcul_N(), 26)
+        mdp = "ABCDEFGHIJ"
+        self.assertEqual(calcul_N(mdp), 26)
 
-        mdp = MDP("A1B2HI98")
-        self.assertEqual(mdp.calcul_N(), 36)
+        mdp = "A1B2HI98"
+        self.assertEqual(calcul_N(mdp), 36)
 
-        mdp = MDP("AbCd")
-        self.assertEqual(mdp.calcul_N(), 52)
+        mdp = "AbCd"
+        self.assertEqual(calcul_N(mdp), 52)
 
-        mdp = MDP("Ab1C")
-        self.assertEqual(mdp.calcul_N(), 62)
+        mdp = "Ab1C"
+        self.assertEqual(calcul_N(mdp), 62)
 
-        mdp = MDP("A!b1C")
-        self.assertEqual(mdp.calcul_N(), 70)
+        mdp = "A!b1C"
+        self.assertEqual(calcul_N(mdp), 70)
 
-        mdp = MDP("A!b1Ç")
-        self.assertEqual(mdp.calcul_N(), 90)
+        mdp = "A!b1Ç"
+        self.assertEqual(calcul_N(mdp), 90)
 
     def test_calcul_L(self):
-        mdp = MDP("10101")
-        self.assertEqual(mdp.calcul_L(), 5)
+        mdp = "10101"
+        self.assertEqual(calcul_L(mdp), 5)
 
-        mdp = MDP("123456")
-        self.assertEqual(mdp.calcul_L(), 6)
+        mdp = "123456"
+        self.assertEqual(calcul_L(mdp), 6)
 
     def test_calcul_entropie(self):
-        mdp = MDP("10101")
-        self.assertEqual(mdp.calcul_entropie(), "très faible")
+        mdp = "10101"
+        self.assertEqual(calcul_entropie(mdp)[1], "très faible")
 
-        mdp = MDP("123456789012345678901234")
-        self.assertEqual(mdp.calcul_entropie(), "faible")
+        mdp = "123456789012345678901234"
+        self.assertEqual(calcul_entropie(mdp)[1], "faible")
 
-        mdp = MDP("AbCdEfGh12345!")
-        self.assertEqual(mdp.calcul_entropie(), "moyen")
+        mdp = "AbCdEfGh12345!"
+        self.assertEqual(calcul_entropie(mdp)[1], "moyen")
 
-        mdp = MDP("AbCdEfGh123456789012345678901234567890")
-        self.assertEqual(mdp.calcul_entropie(), "fort")
+        mdp = "AbCdEfGh123456789012345678901234567890"
+        self.assertEqual(calcul_entropie(mdp)[1], "fort")
 
     def test_generate_mdp(self):
-        mdp_instance = MDP()
+        mdp_instance = GEN_MDP()
 
         nombre_minuscule_default = 5
         nombre_majuscule_default = 3
@@ -93,7 +96,7 @@ class TestMDP(unittest.TestCase):
         return responses.pop(0)
 
     def test_new_mdp(self):
-        mdp_instance = MDP()
+        mdp_instance = GEN_MDP()
 
         original_input = __builtins__.input
         __builtins__.input = self.input_stub
@@ -105,7 +108,7 @@ class TestMDP(unittest.TestCase):
         self.assertEqual(len(mdp_instance.get_mdp()), 8)
 
     def test_lancer_de(self):
-        mdp = MDP()
+        mdp = GEN_PASSPHRASE()
         for i in range(100):
             code = mdp.lancer_de()
             self.assertEqual(len(code), 5)
@@ -113,7 +116,7 @@ class TestMDP(unittest.TestCase):
                 self.assertTrue(1 <= int(char) <= 6)
 
     def test_generate_passphrase(self):
-        mdp = MDP()
+        mdp = GEN_PASSPHRASE()
         passphrase = mdp.generate_passphrase()
         self.assertIsInstance(passphrase, str)
 

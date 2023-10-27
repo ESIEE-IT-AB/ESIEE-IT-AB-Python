@@ -1,6 +1,4 @@
 import random
-from reponse import Reponse
-
 
 class Question:
     def __init__(self, question, reponses):
@@ -18,7 +16,7 @@ class Question:
         return False
 
     """
-    Permet de recuperer la reponse d'une question
+    Permet de recuperer la bonne reponse d'une question
     """
     def get_reponse_correct(self):
         for reponse in self.reponses:
@@ -27,19 +25,19 @@ class Question:
         return None
 
     """
-    Permet de recuperer les choix d'une question
+    Permet de recuperer les reponses d'une question
     """
     def get_reponse(self):
         return [reponse.get_content() for reponse in self.reponses]
 
     """
-    Permet de recuperer la question
+    Permet de recuperer l'intitulé de la question
     """
     def get_question(self):
         return self.question
 
     """
-    Permet de shuffle les choix
+    Permet de shuffle les reponses
     """
-    def shuffle_reponse(self):
+    def shuffle_reponses(self):
         random.shuffle(self.reponses)

@@ -1,4 +1,3 @@
-
 class Reponse:
     def __init__(self, content, is_correct=False):
         self.content = content

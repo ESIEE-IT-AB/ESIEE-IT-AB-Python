@@ -13,20 +13,20 @@ class TestQuestion(unittest.TestCase):
         self.assertTrue(self.question.correction("interprété"))
         self.assertFalse(self.question.correction("compilé"))
 
-    def test_get_reponse(self):
+    def test_get_reponse_correct(self):
         self.assertEqual(self.question.get_reponse_correct(), "interprété")
 
-    def test_get_choix(self):
+    def test_get_reponse(self):
         self.assertEqual(self.question.get_reponse(), ["interprété", "compilé", "machine"])
 
     def test_get_question(self):
         self.assertEqual(self.question.get_question(), "Python est un langage _______")
 
-    def test_shuffle_choix(self):
-        choix_default = self.question.get_reponse()
-        self.question.shuffle_reponse()
-        choix_shuffled = self.question.get_reponse()
-        self.assertCountEqual(choix_default, choix_shuffled)
+    def test_shuffle_reponses(self):
+        reponses_default = self.question.get_reponse()
+        self.question.shuffle_reponses()
+        reponses_shuffled = self.question.get_reponse()
+        self.assertCountEqual(reponses_default, reponses_shuffled)
 
 
 class TestQCM(unittest.TestCase):
