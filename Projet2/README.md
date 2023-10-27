@@ -9,8 +9,8 @@ Ce projet vous permet de générer des mots de passe sécurisés ainsi que de te
 1. **Testeur de mot de passe** : Calcule la force d'un mot de passe basé sur l'entropie respectant les critères de l’ANSSI. 
 2. **Générateur de mot de passe aléatoire** : Permet à l'utilisateur de définir des critères tels que le nombre de minuscules, majuscules, chiffres et caractères spéciaux. Le mot de passe généré est ensuite affiché avec son entropie et sa force.
 3. **Générateur de passphrase** : Basé sur la méthode de dés de l’EFF.
-4. **Structure orientée objet** : Le code est structuré autour d'objets et classes pour une meilleure modularité et lisibilité.
-
+4. **Menu** : Un menu permet de selectionner l'outil que vous voulez utiliser.
+   
 ## Comment démarrer ?
 
 1. Exécutez `main.py` pour démarrer le programme.
