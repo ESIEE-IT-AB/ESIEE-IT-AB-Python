@@ -26,7 +26,7 @@ python main.py
 - **force_mdp.py** : Contient la classe principale `FORCE_MDP` qui permet de calculer la force d'un mot de passe.
 - **gen_mdp.py** : Contient la classe principale `GEN_MDP` qui permet de crée un mot de passe et d'afficher sa force.
 - **gen_passphrase.py** : Contient la classe principale `GEN_PASSPHRASE` qui permet de crée une passphrase via un dictionnaire de mot.
-- **module_mdp.py** : Contient les fonction qui calcule la force d'un mot de passe.
+- **module_mdp.py** : Contient les fonctions qui calcule la force d'un mot de passe.
 - **file.py** : Contient la classe `FILE` qui gère la lecture du fichier contenant la liste de mots pour la passphrase.
 - **test.py** : Contient les tests unitaires pour le projet.
 
