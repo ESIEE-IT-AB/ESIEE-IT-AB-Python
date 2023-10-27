@@ -16,16 +16,27 @@ Ce projet vous permet de générer des mots de passe sécurisés ainsi que de te
 1. Exécutez `main.py` pour démarrer le programme.
 2. Suivez les instructions à l'écran pour tester un mot de passe, générer un nouveau mot de passe et une nouvelle passphrase.
 
+```
+python main.py
+```
+
 ## Structure du projet
 
 - **main.py** : Point d'entrée du programme.
-- **mdp.py** : Contient la classe principale `MDP` qui gère la création, le test et l'affichage des mots de passe.
+- **force_mdp.py** : Contient la classe principale `FORCE_MDP` qui permet de calculer la force d'un mot de passe.
+- **gen_mdp.py** : Contient la classe principale `GEN_MDP` qui permet de crée un mot de passe et d'afficher sa force.
+- **gen_passphrase.py** : Contient la classe principale `GEN_PASSPHRASE` qui permet de crée une passphrase via un dictionnaire de mot.
+- **module_mdp.py** : Contient les fonction qui calcule la force d'un mot de passe.
 - **file.py** : Contient la classe `FILE` qui gère la lecture du fichier contenant la liste de mots pour la passphrase.
 - **test.py** : Contient les tests unitaires pour le projet.
 
 ## Tests
 
 Pour exécuter les tests unitaires, exécutez `test.py`.
+
+```
+python -m unittest test.py
+```
 
 ## Liens utiles
 
